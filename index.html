@@ -516,7 +516,7 @@
         .copy-btn {
             position: absolute;
             top: 16px;
-            left: 16px;
+            right: 16px;
             background: rgba(255, 255, 255, 0.04);
             border: 1px solid rgba(255, 255, 255, 0.1);
             color: var(--text-muted);
@@ -847,7 +847,7 @@
     <!-- SCROLL TO TOP -->
     <button class="scroll-top" id="scrollTopBtn" title="الرجوع للأعلى">↑</button>
 
-    <!-- ==================== CODES DATA (ملف خارجي) ==================== -->
+    <!-- ==================== CODES DATA ==================== -->
     <script src="codes-data.js"></script>
 
     <!-- ==================== MAIN SCRIPT ==================== -->
@@ -876,15 +876,13 @@
                 } else {
                     count = parseInt(count);
                 }
-                // زيادة عشوائية بين 1 و 18
                 const increment = Math.floor(Math.random() * 18) + 1;
                 count += increment;
                 localStorage.setItem('obd_visitor_count', count);
                 return count;
             }
             const visitorCount = getVisitorCount();
-            document.getElementById('visitorCount').textContent = visitorCount.toLocaleString(
-            'en-US');
+            document.getElementById('visitorCount').textContent = visitorCount.toLocaleString('en-US');
 
             // ============ DOM ELEMENTS ============
             const codesGrid = document.getElementById('codesGrid');
@@ -902,12 +900,10 @@
             function renderCodes() {
                 let filtered = window.faultCodes || [];
 
-                // فلترة حسب التصنيف
                 if (currentFilter !== 'all') {
                     filtered = filtered.filter(c => c.country === 'عام' || c.country === currentFilter);
                 }
 
-                // فلترة حسب البحث
                 if (searchQuery.trim()) {
                     const q = searchQuery.trim().toLowerCase();
                     filtered = filtered.filter(c =>
@@ -923,11 +919,11 @@
 
                 if (filtered.length === 0) {
                     codesGrid.innerHTML = `
-                            <div class="no-results">
-                                <span class="icon-big">😕</span>
-                                <p>لا توجد نتائج مطابقة لبحثك</p>
-                                <p style="font-size:0.85rem;margin-top:4px;">جرب كود آخر مثل P0420 أو P0300</p>
-                            </div>`;
+                        <div class="no-results">
+                            <span class="icon-big">😕</span>
+                            <p>لا توجد نتائج مطابقة لبحثك</p>
+                            <p style="font-size:0.85rem;margin-top:4px;">جرب كود آخر مثل P0420 أو P0300</p>
+                        </div>`;
                     return;
                 }
 
@@ -938,25 +934,26 @@
                         codeData.code.startsWith('B') ? 'type-b' :
                         codeData.code.startsWith('C') ? 'type-c' :
                         codeData.code.startsWith('U') ? 'type-u' : 'type-p';
+
                     card.innerHTML = `
-                            <button class="copy-btn" data-code="${codeData.code}" title="نسخ الكود">📋</button>
-                            <div class="code-header">
-                                <span class="code-badge ${typeClass}">${codeData.code}</span>
-                                <span class="code-country-tag">${codeData.country}</span>
-                            </div>
-                            <p class="code-desc">${codeData.desc}</p>
-                            <p class="code-causes"><span class="code-causes-label">الأسباب:</span> ${codeData.causes}</p>
-                            <p class="expand-hint">اضغط للتوسيع وعرض المزيد...</p>
-                        `;
-                    // Toggle expand on click (not on copy button)
-                    card.addEventListener('click', function(e) {
-                        if (e.target.closest('.copy-btn')) return;
-                        card.classList.toggle('expanded');
-                    });
+                        <button class="copy-btn" data-code="${codeData.code}" title="نسخ الكود">📋</button>
+                        <div class="code-header">
+                            <span class="code-badge ${typeClass}">${codeData.code}</span>
+                            <span class="code-country-tag">${codeData.country}</span>
+                        </div>
+                        <p class="code-desc">${codeData.desc}</p>
+                        <p class="code-causes"><span class="code-causes-label">الأسباب:</span> ${codeData.causes}</p>
+                        <p class="expand-hint">اضغط للتوسيع وعرض المزيد...</p>
+                    `;
+
+                    card.onclick = function(event) {
+                        if (event.target.closest('.copy-btn')) return;
+                        this.classList.toggle('expanded');
+                    };
+
                     codesGrid.appendChild(card);
                 });
 
-                // Attach copy button events
                 document.querySelectorAll('.copy-btn').forEach(btn => {
                     btn.addEventListener('click', function(e) {
                         e.stopPropagation();
@@ -969,7 +966,6 @@
                                 this.textContent = '📋';
                             }, 1500);
                         }).catch(() => {
-                            // fallback
                             const ta = document.createElement('textarea');
                             ta.value = code;
                             ta.style.position = 'fixed';
@@ -1010,49 +1006,35 @@
 
             filterTabs.addEventListener('click', function(e) {
                 if (e.target.classList.contains('filter-tab')) {
-                    document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove(
-                        'active'));
+                    document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
                     e.target.classList.add('active');
                     currentFilter = e.target.getAttribute('data-filter');
-                    // Sync badge countries
-                    document.querySelectorAll('.badge-country').forEach(b => b.classList
-                        .remove('active'));
-                    const matchingBadge = document.querySelector(
-                        `.badge-country[data-country="${currentFilter}"]`);
+                    document.querySelectorAll('.badge-country').forEach(b => b.classList.remove('active'));
+                    const matchingBadge = document.querySelector(`.badge-country[data-country="${currentFilter}"]`);
                     if (matchingBadge) matchingBadge.classList.add('active');
                     renderCodes();
-                    // Scroll to grid
                     codesGrid.scrollIntoView({ behavior: 'smooth', block: 'start' });
                 }
             });
 
-            // Badge countries click
             badgeCountries.forEach(badge => {
                 badge.addEventListener('click', function() {
                     const country = this.getAttribute('data-country');
                     currentFilter = country;
-                    // Update filter tabs
-                    document.querySelectorAll('.filter-tab').forEach(t => t.classList
-                        .remove('active'));
-                    const matchingTab = document.querySelector(
-                        `.filter-tab[data-filter="${country}"]`);
+                    document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
+                    const matchingTab = document.querySelector(`.filter-tab[data-filter="${country}"]`);
                     if (matchingTab) matchingTab.classList.add('active');
                     else {
-                        // If no exact tab, activate 'all'? Actually we have tabs for each.
-                        // Fallback: activate the matching one
                         const allTab = document.querySelector('.filter-tab[data-filter="all"]');
                         if (allTab) allTab.classList.add('active');
                     }
-                    // Update badges
-                    document.querySelectorAll('.badge-country').forEach(b => b.classList
-                        .remove('active'));
+                    document.querySelectorAll('.badge-country').forEach(b => b.classList.remove('active'));
                     this.classList.add('active');
                     renderCodes();
                     codesGrid.scrollIntoView({ behavior: 'smooth', block: 'start' });
                 });
             });
 
-            // Scroll to top button
             window.addEventListener('scroll', function() {
                 if (window.scrollY > 600) {
                     scrollTopBtn.classList.add('visible');
@@ -1064,10 +1046,8 @@
                 window.scrollTo({ top: 0, behavior: 'smooth' });
             });
 
-            // Keyboard shortcut: Ctrl+K or / to focus search
             document.addEventListener('keydown', function(e) {
-                if ((e.ctrlKey && e.key === 'k') || (e.key === '/' && !e.ctrlKey && document
-                        .activeElement === document.body)) {
+                if ((e.ctrlKey && e.key === 'k') || (e.key === '/' && !e.ctrlKey && document.activeElement === document.body)) {
                     e.preventDefault();
                     searchInput.focus();
                 }
@@ -1080,7 +1060,6 @@
                 }
             });
 
-            // ============ INITIAL RENDER ============
             function waitForData() {
                 if (window.faultCodes && window.faultCodes.length > 0) {
                     renderCodes();
@@ -1093,8 +1072,7 @@
             console.log('%c🚗 مرجع أكواد أعطال السيارات %c| تم التطوير بواسطة ابو عساف',
                 'font-size:1.2rem;color:#f59e0b;', 'color:#60a5fa;');
             console.log('%cسناب وانستا وتويتر وتلقرام: sww_p', 'color:#a78bfa;font-size:0.9rem;');
-            console.log('%cعدد الأكواد: ' + (window.faultCodes ? window.faultCodes.length :
-                'جار التحميل...'),
+            console.log('%cعدد الأكواد: ' + (window.faultCodes ? window.faultCodes.length : 'جار التحميل...'),
                 'color:#34d399;');
         })();
     </script>
