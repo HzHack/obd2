@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>مرجع أكواد أعطال السيارات | OBD-II Code Reference</title>
-    <meta name="description" content="مرجع شامل لأكواد أعطال السيارات OBD-II - أكثر من 300 كود مع الأسباب والحلول. كوري، ألماني، أمريكي، صيني، ياباني.">
+    <meta name="description" content="مرجع شامل لأكواد أعطال السيارات OBD-II - أكثر من 200 كود حقيقي مع الأسباب والحلول.">
     <meta name="keywords" content="أكواد أعطال السيارات, OBD-II, P0420, P0300, فحص السيارة, أعطال المحرك">
     <meta name="author" content="أبو عساف">
     <meta name="theme-color" content="#0a0a1a">
@@ -17,39 +17,26 @@
             --bg-card: #111128;
             --glass-bg: rgba(15, 15, 40, 0.65);
             --glass-border: rgba(255, 255, 255, 0.08);
-            --glass-highlight: rgba(255, 255, 255, 0.03);
             --text-primary: #e8e8f0;
             --text-secondary: #b0b0c8;
             --text-muted: #7a7a9a;
             --accent-blue: #3b82f6;
             --accent-cyan: #06b6d4;
             --accent-purple: #8b5cf6;
-            --accent-pink: #ec4899;
             --accent-amber: #f59e0b;
             --accent-emerald: #10b981;
             --accent-red: #ef4444;
             --gradient-hero: linear-gradient(135deg, #0c0c1d 0%, #0a0a2e 30%, #060620 60%, #0d0d1f 100%);
             --gradient-card: linear-gradient(160deg, rgba(20, 20, 55, 0.7) 0%, rgba(10, 10, 30, 0.8) 100%);
-            --gradient-glow: radial-gradient(ellipse at center, rgba(100, 80, 255, 0.15) 0%, transparent 70%);
-            --shadow-lg: 0 8px 40px rgba(0, 0, 0, 0.5), 0 2px 10px rgba(0, 0, 0, 0.3);
-            --shadow-card: 0 4px 20px rgba(0, 0, 0, 0.4), 0 1px 4px rgba(0, 0, 0, 0.2);
+            --shadow-lg: 0 8px 40px rgba(0,0,0,0.5), 0 2px 10px rgba(0,0,0,0.3);
+            --shadow-card: 0 4px 20px rgba(0,0,0,0.4), 0 1px 4px rgba(0,0,0,0.2);
             --radius-xl: 20px;
             --radius-lg: 16px;
             --radius-md: 12px;
-            --radius-sm: 8px;
             --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
         body {
             font-family: 'Tajawal', sans-serif;
             background: var(--bg-primary);
@@ -57,1033 +44,632 @@
             min-height: 100vh;
             line-height: 1.7;
             overflow-x: hidden;
-            position: relative;
             -webkit-font-smoothing: antialiased;
         }
 
-        /* ============ BACKGROUND ANIMATION ============ */
+        /* ── BACKGROUND ── */
         .bg-universe {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 0;
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none; z-index: 0;
             background: var(--gradient-hero);
         }
         .bg-universe::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(ellipse at 30% 20%, rgba(59, 130, 246, 0.06) 0%, transparent 50%),
-                radial-gradient(ellipse at 70% 60%, rgba(139, 92, 246, 0.05) 0%, transparent 50%),
-                radial-gradient(ellipse at 40% 80%, rgba(6, 182, 212, 0.04) 0%, transparent 50%),
-                radial-gradient(ellipse at 60% 30%, rgba(236, 72, 153, 0.03) 0%, transparent 50%);
+            content: ''; position: absolute; top: -50%; left: -50%;
+            width: 200%; height: 200%;
+            background:
+                radial-gradient(ellipse at 30% 20%, rgba(59,130,246,0.06) 0%, transparent 50%),
+                radial-gradient(ellipse at 70% 60%, rgba(139,92,246,0.05) 0%, transparent 50%),
+                radial-gradient(ellipse at 40% 80%, rgba(6,182,212,0.04) 0%, transparent 50%);
             animation: bgPulse 15s ease-in-out infinite;
         }
         @keyframes bgPulse {
-            0%,
-            100% {
-                transform: translate(0, 0) scale(1);
-            }
-            25% {
-                transform: translate(2%, -1%) scale(1.05);
-            }
-            50% {
-                transform: translate(-1%, 2%) scale(1.03);
-            }
-            75% {
-                transform: translate(-2%, -2%) scale(1.04);
-            }
+            0%,100% { transform: translate(0,0) scale(1); }
+            50%      { transform: translate(-1%,2%) scale(1.03); }
         }
         .bg-grid {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 0;
-            opacity: 0.25;
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none; z-index: 0; opacity: 0.2;
             background-image:
-                linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+                linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
             background-size: 50px 50px;
             mask-image: radial-gradient(ellipse at center, black 30%, transparent 70%);
             -webkit-mask-image: radial-gradient(ellipse at center, black 30%, transparent 70%);
         }
-        .bg-particles {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 0;
-        }
-        .particle {
-            position: absolute;
-            border-radius: 50%;
-            background: white;
-            animation: floatUp linear infinite;
-            opacity: 0;
-        }
+        .bg-particles { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+        .particle { position: absolute; border-radius: 50%; animation: floatUp linear infinite; opacity: 0; }
         @keyframes floatUp {
-            0% {
-                transform: translateY(100vh) scale(0);
-                opacity: 0;
-            }
-            10% {
-                opacity: 0.7;
-            }
-            90% {
-                opacity: 0.3;
-            }
-            100% {
-                transform: translateY(-10vh) scale(1.5);
-                opacity: 0;
-            }
+            0%   { transform: translateY(100vh) scale(0); opacity: 0; }
+            10%  { opacity: 0.6; }
+            90%  { opacity: 0.2; }
+            100% { transform: translateY(-10vh) scale(1.5); opacity: 0; }
         }
 
-        /* ============ MAIN CONTAINER ============ */
-        .main-container {
-            position: relative;
-            z-index: 1;
-            max-width: 1300px;
-            margin: 0 auto;
-            padding: 20px 24px 40px;
-        }
+        /* ── LAYOUT ── */
+        .main-container { position: relative; z-index: 1; max-width: 1300px; margin: 0 auto; padding: 20px 24px 40px; }
 
-        /* ============ HEADER ============ */
-        .header {
-            text-align: center;
-            padding: 40px 20px 30px;
-            position: relative;
-            z-index: 2;
-        }
-        .header-icon {
-            display: inline-block;
-            font-size: 60px;
-            margin-bottom: 10px;
-            animation: bounce 2s ease-in-out infinite;
-            filter: drop-shadow(0 0 30px rgba(59, 130, 246, 0.5));
-        }
-        @keyframes bounce {
-            0%,
-            100% {
-                transform: translateY(0);
-            }
-            50% {
-                transform: translateY(-18px);
-            }
-        }
+        /* ── HEADER ── */
+        .header { text-align: center; padding: 40px 20px 30px; }
+        .header-icon { display: inline-block; font-size: 60px; margin-bottom: 10px; animation: bounce 2s ease-in-out infinite; filter: drop-shadow(0 0 30px rgba(59,130,246,0.5)); }
+        @keyframes bounce { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-16px); } }
         .header h1 {
-            font-size: clamp(2rem, 5vw, 3.4rem);
-            font-weight: 900;
-            letter-spacing: -0.5px;
-            background: linear-gradient(135deg, #e8e8f0 0%, #60a5fa 40%, #a78bfa 70%, #e8e8f0 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-bottom: 8px;
-            line-height: 1.3;
+            font-size: clamp(2rem,5vw,3.4rem); font-weight: 900;
+            background: linear-gradient(135deg,#e8e8f0 0%,#60a5fa 40%,#a78bfa 70%,#e8e8f0 100%);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+            margin-bottom: 8px; line-height: 1.3;
         }
-        .header .subtitle {
-            font-size: 1.1rem;
-            color: var(--text-secondary);
-            font-weight: 400;
-            letter-spacing: 0.5px;
-        }
-        .header .badge-row {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 10px;
-            margin-top: 18px;
-        }
+        .header .subtitle { font-size: 1.1rem; color: var(--text-secondary); font-weight: 400; }
+        .header .badge-row { display: flex; justify-content: center; flex-wrap: wrap; gap: 10px; margin-top: 18px; }
+
         .badge-country {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            padding: 7px 16px;
-            border-radius: 50px;
-            font-size: 0.85rem;
-            font-weight: 600;
-            background: var(--glass-bg);
-            border: 1px solid var(--glass-border);
-            color: var(--text-secondary);
-            cursor: pointer;
-            transition: var(--transition);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
+            display: inline-flex; align-items: center; gap: 6px;
+            padding: 7px 16px; border-radius: 50px; font-size: 0.85rem; font-weight: 600;
+            background: var(--glass-bg); border: 1px solid var(--glass-border);
+            color: var(--text-secondary); cursor: pointer; transition: var(--transition);
+            backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
         }
-        .badge-country:hover,
-        .badge-country.active {
-            background: rgba(59, 130, 246, 0.2);
-            border-color: rgba(59, 130, 246, 0.4);
-            color: #fff;
-            box-shadow: 0 0 20px rgba(59, 130, 246, 0.2);
-            transform: translateY(-2px);
-        }
-        .badge-country .flag-dot {
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
-            display: inline-block;
-        }
-        .dot-kr {
-            background: #cd2e3a;
-        }
-        .dot-de {
-            background: #ffcc00;
-        }
-        .dot-us {
-            background: #3b82f6;
-        }
-        .dot-cn {
-            background: #ef4444;
-        }
-        .dot-jp {
-            background: #fff;
-            border: 2px solid #ccc;
+        .badge-country:hover, .badge-country.active {
+            background: rgba(59,130,246,0.2); border-color: rgba(59,130,246,0.4);
+            color: #fff; box-shadow: 0 0 20px rgba(59,130,246,0.2); transform: translateY(-2px);
         }
 
-        /* ============ SEARCH BAR ============ */
-        .search-section {
-            position: relative;
-            z-index: 2;
-            max-width: 700px;
-            margin: 0 auto 30px;
+        /* ── STATS BAR ── */
+        .stats-bar {
+            display: flex; flex-wrap: wrap; gap: 12px; justify-content: center;
+            margin-bottom: 24px; position: relative; z-index: 2;
         }
+        .stat-pill {
+            display: flex; align-items: center; gap: 8px;
+            background: var(--glass-bg); border: 1px solid var(--glass-border);
+            border-radius: 50px; padding: 8px 18px; font-size: 0.85rem;
+            backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+            color: var(--text-secondary);
+        }
+        .stat-pill strong { color: var(--accent-cyan); font-size: 1rem; }
+
+        /* ── SEARCH ── */
+        .search-section { position: relative; z-index: 2; max-width: 700px; margin: 0 auto 30px; }
         .search-wrapper {
-            position: relative;
-            background: var(--glass-bg);
-            border: 1.5px solid var(--glass-border);
-            border-radius: 60px;
-            padding: 6px;
-            display: flex;
-            align-items: center;
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            box-shadow: var(--shadow-lg);
-            transition: var(--transition);
+            position: relative; background: var(--glass-bg); border: 1.5px solid var(--glass-border);
+            border-radius: 60px; padding: 6px; display: flex; align-items: center;
+            backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+            box-shadow: var(--shadow-lg); transition: var(--transition);
         }
-        .search-wrapper:focus-within {
-            border-color: rgba(59, 130, 246, 0.5);
-            box-shadow: 0 0 40px rgba(59, 130, 246, 0.25), var(--shadow-lg);
-        }
-        .search-icon {
-            font-size: 1.4rem;
-            margin: 0 14px;
-            color: var(--text-muted);
-            flex-shrink: 0;
-        }
+        .search-wrapper:focus-within { border-color: rgba(59,130,246,0.5); box-shadow: 0 0 40px rgba(59,130,246,0.25), var(--shadow-lg); }
+        .search-icon { font-size: 1.4rem; margin: 0 14px; color: var(--text-muted); flex-shrink: 0; }
         .search-input {
-            flex: 1;
-            background: transparent;
-            border: none;
-            outline: none;
-            color: #fff;
-            font-size: 1.05rem;
-            font-family: 'Tajawal', sans-serif;
-            padding: 14px 8px;
-            min-width: 0;
+            flex: 1; background: transparent; border: none; outline: none;
+            color: #fff; font-size: 1.05rem; font-family: 'Tajawal', sans-serif;
+            padding: 14px 8px; min-width: 0;
         }
-        .search-input::placeholder {
-            color: var(--text-muted);
-            font-weight: 300;
-        }
+        .search-input::placeholder { color: var(--text-muted); font-weight: 300; }
         .search-clear {
-            background: rgba(255, 255, 255, 0.05);
-            border: none;
-            color: var(--text-muted);
-            cursor: pointer;
-            width: 36px;
-            height: 36px;
-            border-radius: 50%;
-            font-size: 1.1rem;
-            margin-right: 6px;
-            transition: var(--transition);
-            flex-shrink: 0;
-            display: none;
-            align-items: center;
-            justify-content: center;
+            background: rgba(255,255,255,0.05); border: none; color: var(--text-muted);
+            cursor: pointer; width: 36px; height: 36px; border-radius: 50%;
+            font-size: 1.1rem; margin-right: 6px; transition: var(--transition);
+            flex-shrink: 0; display: none; align-items: center; justify-content: center;
         }
-        .search-clear.visible {
-            display: flex;
-        }
-        .search-clear:hover {
-            background: rgba(255, 255, 255, 0.12);
-            color: #fff;
-        }
-        .results-count {
-            text-align: center;
-            color: var(--text-muted);
-            font-size: 0.9rem;
-            margin-top: 10px;
-            font-weight: 400;
-        }
-        .results-count span {
-            color: var(--accent-cyan);
-            font-weight: 700;
-        }
+        .search-clear.visible { display: flex; }
+        .search-clear:hover { background: rgba(255,255,255,0.12); color: #fff; }
+        .results-count { text-align: center; color: var(--text-muted); font-size: 0.9rem; margin-top: 10px; }
+        .results-count span { color: var(--accent-cyan); font-weight: 700; }
 
-        /* ============ FILTER TABS ============ */
-        .filter-tabs {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 8px;
-            margin-bottom: 30px;
-            position: relative;
-            z-index: 2;
-        }
+        /* ── FILTER TABS ── */
+        .filter-tabs { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin-bottom: 30px; position: relative; z-index: 2; }
         .filter-tab {
-            padding: 10px 20px;
-            border-radius: 50px;
-            font-size: 0.9rem;
-            font-weight: 600;
-            font-family: 'Tajawal', sans-serif;
-            cursor: pointer;
-            background: var(--glass-bg);
-            border: 1.5px solid var(--glass-border);
-            color: var(--text-secondary);
-            transition: var(--transition);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
+            padding: 10px 20px; border-radius: 50px; font-size: 0.9rem; font-weight: 600;
+            font-family: 'Tajawal', sans-serif; cursor: pointer;
+            background: var(--glass-bg); border: 1.5px solid var(--glass-border);
+            color: var(--text-secondary); transition: var(--transition);
+            backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
             white-space: nowrap;
-            letter-spacing: 0.3px;
         }
-        .filter-tab:hover {
-            background: rgba(255, 255, 255, 0.06);
-            color: #fff;
-            border-color: rgba(255, 255, 255, 0.2);
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
-        }
-        .filter-tab.active {
-            background: var(--accent-blue);
-            border-color: var(--accent-blue);
-            color: #fff;
-            box-shadow: 0 4px 25px rgba(59, 130, 246, 0.45);
-            font-weight: 700;
-        }
+        .filter-tab:hover { background: rgba(255,255,255,0.06); color: #fff; border-color: rgba(255,255,255,0.2); transform: translateY(-2px); }
+        .filter-tab.active { background: var(--accent-blue); border-color: var(--accent-blue); color: #fff; box-shadow: 0 4px 25px rgba(59,130,246,0.45); font-weight: 700; }
 
-        /* ============ CODES GRID ============ */
-        .codes-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
-            gap: 18px;
-            position: relative;
-            z-index: 2;
-            padding-bottom: 30px;
+        /* Severity tabs */
+        .severity-tabs { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin-bottom: 28px; position: relative; z-index: 2; }
+        .sev-tab {
+            padding: 7px 16px; border-radius: 50px; font-size: 0.82rem; font-weight: 600;
+            font-family: 'Tajawal', sans-serif; cursor: pointer;
+            background: var(--glass-bg); border: 1.5px solid var(--glass-border);
+            color: var(--text-secondary); transition: var(--transition);
         }
+        .sev-tab:hover { transform: translateY(-2px); }
+        .sev-tab.active-all  { background: rgba(59,130,246,0.2); border-color: var(--accent-blue); color: #fff; }
+        .sev-tab.active-high { background: rgba(239,68,68,0.2); border-color: var(--accent-red); color: #f87171; }
+        .sev-tab.active-med  { background: rgba(245,158,11,0.2); border-color: var(--accent-amber); color: #fbbf24; }
+        .sev-tab.active-low  { background: rgba(16,185,129,0.2); border-color: var(--accent-emerald); color: #34d399; }
+
+        /* ── CODES GRID ── */
+        .codes-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 18px; position: relative; z-index: 2; padding-bottom: 30px; }
+
         .code-card {
-            background: var(--gradient-card);
-            border: 1px solid var(--glass-border);
-            border-radius: var(--radius-lg);
-            padding: 20px 22px;
-            cursor: pointer;
-            transition: var(--transition);
-            position: relative;
-            overflow: hidden;
-            box-shadow: var(--shadow-card);
-            backdrop-filter: blur(8px);
-            -webkit-backdrop-filter: blur(8px);
+            background: var(--gradient-card); border: 1px solid var(--glass-border);
+            border-radius: var(--radius-lg); padding: 20px 22px;
+            cursor: pointer; transition: var(--transition); position: relative; overflow: hidden;
+            box-shadow: var(--shadow-card); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+            scroll-margin-top: 20px;
         }
-        .code-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: var(--gradient-glow);
-            opacity: 0;
-            transition: opacity 0.4s ease;
-            pointer-events: none;
-        }
-        .code-card:hover {
-            transform: translateY(-5px);
-            border-color: rgba(255, 255, 255, 0.18);
-            box-shadow: 0 16px 40px rgba(0, 0, 0, 0.55), 0 0 30px rgba(59, 130, 246, 0.1);
-        }
-        .code-card:hover::before {
-            opacity: 1;
-        }
-        .code-card.expanded {
-            border-color: rgba(59, 130, 246, 0.5);
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6), 0 0 40px rgba(59, 130, 246, 0.2);
-            transform: translateY(-3px);
-        }
-        .code-header {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            margin-bottom: 10px;
-            flex-wrap: wrap;
-        }
+        .code-card:hover { transform: translateY(-5px); border-color: rgba(255,255,255,0.18); box-shadow: 0 16px 40px rgba(0,0,0,0.55), 0 0 30px rgba(59,130,246,0.1); }
+        .code-card.expanded { border-color: rgba(59,130,246,0.5); box-shadow: 0 20px 50px rgba(0,0,0,0.6), 0 0 40px rgba(59,130,246,0.2); transform: translateY(-3px); }
+
+        /* severity left border */
+        .code-card::after { content: ''; position: absolute; right: 0; top: 0; height: 100%; width: 3px; border-radius: 0 var(--radius-lg) var(--radius-lg) 0; }
+        .sev-high::after { background: var(--accent-red); }
+        .sev-med::after  { background: var(--accent-amber); }
+        .sev-low::after  { background: var(--accent-emerald); }
+
+        .code-header { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; flex-wrap: wrap; }
         .code-badge {
-            display: inline-block;
-            padding: 6px 14px;
-            border-radius: 50px;
-            font-weight: 800;
-            font-size: 1rem;
-            letter-spacing: 1px;
-            font-family: 'Courier New', monospace;
-            background: rgba(239, 68, 68, 0.2);
-            color: #f87171;
-            border: 1px solid rgba(239, 68, 68, 0.3);
-            white-space: nowrap;
-            position: relative;
-            z-index: 2;
+            display: inline-block; padding: 6px 14px; border-radius: 50px;
+            font-weight: 800; font-size: 1rem; letter-spacing: 1px;
+            font-family: 'Courier New', monospace; white-space: nowrap;
         }
-        .code-badge.type-p {
-            background: rgba(239, 68, 68, 0.2);
-            color: #f87171;
-            border-color: rgba(239, 68, 68, 0.3);
+        .type-p { background: rgba(239,68,68,0.2); color: #f87171; border: 1px solid rgba(239,68,68,0.3); }
+        .type-b { background: rgba(245,158,11,0.2); color: #fbbf24; border: 1px solid rgba(245,158,11,0.3); }
+        .type-c { background: rgba(16,185,129,0.2); color: #34d399; border: 1px solid rgba(16,185,129,0.3); }
+        .type-u { background: rgba(139,92,246,0.2); color: #a78bfa; border: 1px solid rgba(139,92,246,0.3); }
+
+        .code-country-tag { font-size: 0.75rem; font-weight: 600; padding: 4px 10px; border-radius: 20px; background: rgba(255,255,255,0.04); color: var(--text-muted); }
+
+        .severity-tag {
+            font-size: 0.72rem; font-weight: 700; padding: 3px 10px; border-radius: 20px;
+            margin-right: auto;
         }
-        .code-badge.type-b {
-            background: rgba(245, 158, 11, 0.2);
-            color: #fbbf24;
-            border-color: rgba(245, 158, 11, 0.3);
-        }
-        .code-badge.type-c {
-            background: rgba(16, 185, 129, 0.2);
-            color: #34d399;
-            border-color: rgba(16, 185, 129, 0.3);
-        }
-        .code-badge.type-u {
-            background: rgba(139, 92, 246, 0.2);
-            color: #a78bfa;
-            border-color: rgba(139, 92, 246, 0.3);
-        }
-        .code-country-tag {
-            font-size: 0.75rem;
-            font-weight: 600;
-            padding: 4px 10px;
-            border-radius: 20px;
-            background: rgba(255, 255, 255, 0.04);
-            color: var(--text-muted);
-            position: relative;
-            z-index: 2;
-        }
-        .code-desc {
-            font-size: 1rem;
-            font-weight: 600;
-            color: var(--text-primary);
-            margin-bottom: 6px;
-            position: relative;
-            z-index: 2;
-            line-height: 1.5;
-        }
+        .sev-label-high { background: rgba(239,68,68,0.15); color: #f87171; border: 1px solid rgba(239,68,68,0.3); }
+        .sev-label-med  { background: rgba(245,158,11,0.15); color: #fbbf24; border: 1px solid rgba(245,158,11,0.3); }
+        .sev-label-low  { background: rgba(16,185,129,0.15); color: #34d399; border: 1px solid rgba(16,185,129,0.3); }
+
+        .code-desc { font-size: 1rem; font-weight: 600; color: var(--text-primary); margin-bottom: 8px; line-height: 1.5; }
+
         .code-causes {
-            font-size: 0.85rem;
-            color: var(--text-muted);
-            position: relative;
-            z-index: 2;
-            line-height: 1.6;
-            max-height: 2.7em;
-            overflow: hidden;
-            transition: max-height 0.4s ease;
+            font-size: 0.85rem; color: var(--text-muted); line-height: 1.7;
+            max-height: 2.8em; overflow: hidden; transition: max-height 0.5s ease;
         }
-        .code-card.expanded .code-causes {
-            max-height: 500px;
-        }
-        .code-causes-label {
-            color: var(--accent-amber);
-            font-weight: 600;
-        }
-        .expand-hint {
-            font-size: 0.75rem;
-            color: var(--accent-cyan);
-            margin-top: 6px;
-            position: relative;
-            z-index: 2;
-            opacity: 0.7;
-            transition: var(--transition);
-        }
-        .code-card.expanded .expand-hint {
-            opacity: 0;
-        }
+        .code-card.expanded .code-causes { max-height: 600px; }
+        .code-causes-label { color: var(--accent-amber); font-weight: 700; }
+
+        .expand-hint { font-size: 0.75rem; color: var(--accent-cyan); margin-top: 8px; opacity: 0.7; transition: var(--transition); display: flex; align-items: center; gap: 4px; }
+        .expand-hint .arrow { transition: transform 0.3s ease; }
+        .code-card.expanded .expand-hint .arrow { transform: rotate(180deg); }
+        .expand-hint .hint-text { transition: var(--transition); }
+        .code-card.expanded .expand-hint .hint-text::after { content: 'اضغط للطي'; }
+        .code-card:not(.expanded) .expand-hint .hint-text::after { content: 'اضغط لعرض الأسباب كاملاً'; }
+
+        /* copy button */
         .copy-btn {
-            position: absolute;
-            top: 16px;
-            left: 16px;
-            background: rgba(255, 255, 255, 0.04);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            color: var(--text-muted);
-            cursor: pointer;
-            width: 32px;
-            height: 32px;
-            border-radius: 50%;
-            font-size: 0.85rem;
-            transition: var(--transition);
-            z-index: 5;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            position: absolute; top: 16px; left: 16px;
+            background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1);
+            color: var(--text-muted); cursor: pointer; width: 32px; height: 32px;
+            border-radius: 50%; font-size: 0.85rem; transition: var(--transition);
+            z-index: 5; display: flex; align-items: center; justify-content: center;
         }
-        .copy-btn:hover {
-            background: rgba(255, 255, 255, 0.12);
-            color: #fff;
-            border-color: rgba(255, 255, 255, 0.3);
-        }
-        .copy-btn.copied {
-            background: rgba(16, 185, 129, 0.3);
-            border-color: rgba(16, 185, 129, 0.5);
-            color: #34d399;
-        }
+        .copy-btn:hover { background: rgba(255,255,255,0.12); color: #fff; border-color: rgba(255,255,255,0.3); }
+        .copy-btn.copied { background: rgba(16,185,129,0.3); border-color: rgba(16,185,129,0.5); color: #34d399; }
 
-        /* ============ NO RESULTS ============ */
-        .no-results {
-            text-align: center;
-            padding: 60px 20px;
-            color: var(--text-muted);
-            position: relative;
-            z-index: 2;
-            grid-column: 1 / -1;
+        /* share button */
+        .share-btn {
+            position: absolute; top: 16px; left: 54px;
+            background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1);
+            color: var(--text-muted); cursor: pointer; width: 32px; height: 32px;
+            border-radius: 50%; font-size: 0.8rem; transition: var(--transition);
+            z-index: 5; display: flex; align-items: center; justify-content: center;
         }
-        .no-results .icon-big {
-            font-size: 80px;
-            display: block;
-            margin-bottom: 16px;
-            opacity: 0.5;
-        }
+        .share-btn:hover { background: rgba(139,92,246,0.15); color: #a78bfa; border-color: rgba(139,92,246,0.4); }
 
-        /* ============ FOOTER ============ */
+        /* no results */
+        .no-results { text-align: center; padding: 60px 20px; color: var(--text-muted); grid-column: 1/-1; }
+        .no-results .icon-big { font-size: 80px; display: block; margin-bottom: 16px; opacity: 0.5; }
+
+        /* ── FOOTER ── */
         .site-footer {
-            position: relative;
-            z-index: 2;
-            text-align: center;
-            padding: 40px 20px 30px;
-            margin-top: 20px;
+            position: relative; z-index: 2; text-align: center;
+            padding: 40px 20px 30px; margin-top: 20px;
             border-top: 1px solid var(--glass-border);
-            background: rgba(6, 6, 15, 0.7);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
+            background: rgba(6,6,15,0.7); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
             border-radius: var(--radius-xl) var(--radius-xl) 0 0;
         }
-        .footer-social {
-            display: flex;
-            justify-content: center;
-            gap: 16px;
-            flex-wrap: wrap;
-            margin-bottom: 18px;
-        }
+        .footer-social { display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; margin-bottom: 18px; }
         .social-icon-link {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            padding: 10px 18px;
-            border-radius: 50px;
-            text-decoration: none;
-            color: #fff;
-            font-weight: 600;
-            font-size: 0.9rem;
-            transition: var(--transition);
-            border: 1.5px solid rgba(255, 255, 255, 0.15);
-            background: rgba(255, 255, 255, 0.03);
-            backdrop-filter: blur(8px);
-            -webkit-backdrop-filter: blur(8px);
+            display: flex; align-items: center; gap: 8px; padding: 10px 18px;
+            border-radius: 50px; text-decoration: none; color: #fff; font-weight: 600; font-size: 0.9rem;
+            transition: var(--transition); border: 1.5px solid rgba(255,255,255,0.15);
+            background: rgba(255,255,255,0.03); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
         }
-        .social-icon-link:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
-            border-color: rgba(255, 255, 255, 0.35);
-        }
-        .social-snap:hover {
-            background: rgba(255, 252, 0, 0.15);
-            border-color: #fffc00;
-            box-shadow: 0 10px 30px rgba(255, 252, 0, 0.2);
-        }
-        .social-insta:hover {
-            background: rgba(225, 48, 108, 0.2);
-            border-color: #e1306c;
-            box-shadow: 0 10px 30px rgba(225, 48, 108, 0.2);
-        }
-        .social-twitter:hover {
-            background: rgba(29, 161, 242, 0.2);
-            border-color: #1da1f2;
-            box-shadow: 0 10px 30px rgba(29, 161, 242, 0.2);
-        }
-        .social-telegram:hover {
-            background: rgba(0, 136, 204, 0.2);
-            border-color: #08c;
-            box-shadow: 0 10px 30px rgba(0, 136, 204, 0.2);
-        }
-        .social-icon-svg {
-            width: 22px;
-            height: 22px;
-            flex-shrink: 0;
-        }
-        .footer-dev {
-            font-size: 1rem;
-            font-weight: 700;
-            color: var(--text-primary);
-            margin-bottom: 6px;
-        }
-        .footer-dev span {
-            background: linear-gradient(135deg, #f59e0b, #fbbf24);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            font-weight: 900;
-        }
-        .visitor-counter {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid var(--glass-border);
-            padding: 10px 20px;
-            border-radius: 50px;
-            font-weight: 700;
-            font-size: 0.95rem;
-            margin-top: 12px;
-            color: var(--text-secondary);
-            backdrop-filter: blur(8px);
-            -webkit-backdrop-filter: blur(8px);
-        }
-        .visitor-counter .count-number {
-            color: var(--accent-cyan);
-            font-size: 1.3rem;
-            font-weight: 900;
-            letter-spacing: 1px;
-        }
-        .visitor-dot {
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            background: #10b981;
-            animation: livePulse 1.5s ease-in-out infinite;
-        }
-        @keyframes livePulse {
-            0%,
-            100% {
-                box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
-            }
-            50% {
-                box-shadow: 0 0 0 14px rgba(16, 185, 129, 0);
-            }
-        }
+        .social-icon-link:hover { transform: translateY(-4px); box-shadow: 0 10px 30px rgba(0,0,0,0.4); border-color: rgba(255,255,255,0.35); }
+        .social-snap:hover  { background: rgba(255,252,0,0.15); border-color: #fffc00; }
+        .social-insta:hover { background: rgba(225,48,108,0.2); border-color: #e1306c; }
+        .social-twitter:hover { background: rgba(29,161,242,0.2); border-color: #1da1f2; }
+        .social-telegram:hover { background: rgba(0,136,204,0.2); border-color: #08c; }
+        .social-icon-svg { width: 22px; height: 22px; flex-shrink: 0; }
+        .footer-dev { font-size: 1rem; font-weight: 700; color: var(--text-primary); margin-bottom: 12px; }
+        .footer-dev span { background: linear-gradient(135deg,#f59e0b,#fbbf24); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; font-weight: 900; }
+        .footer-note { font-size: 0.8rem; color: var(--text-muted); margin-top: 10px; }
 
-        /* ============ SCROLL TO TOP ============ */
+        /* ── SCROLL TOP ── */
         .scroll-top {
-            position: fixed;
-            bottom: 30px;
-            left: 30px;
-            z-index: 99;
-            width: 46px;
-            height: 46px;
-            border-radius: 50%;
-            background: var(--accent-blue);
-            border: none;
-            color: #fff;
-            cursor: pointer;
-            font-size: 1.3rem;
-            box-shadow: 0 6px 20px rgba(59, 130, 246, 0.4);
-            transition: var(--transition);
-            opacity: 0;
-            transform: translateY(20px);
-            pointer-events: none;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            position: fixed; bottom: 30px; left: 30px; z-index: 99;
+            width: 46px; height: 46px; border-radius: 50%;
+            background: var(--accent-blue); border: none; color: #fff;
+            cursor: pointer; font-size: 1.3rem; box-shadow: 0 6px 20px rgba(59,130,246,0.4);
+            transition: var(--transition); opacity: 0; transform: translateY(20px); pointer-events: none;
+            display: flex; align-items: center; justify-content: center;
         }
-        .scroll-top.visible {
-            opacity: 1;
-            transform: translateY(0);
-            pointer-events: auto;
-        }
-        .scroll-top:hover {
-            background: #2563eb;
-            box-shadow: 0 10px 30px rgba(59, 130, 246, 0.6);
-            transform: translateY(-4px);
-        }
+        .scroll-top.visible { opacity: 1; transform: translateY(0); pointer-events: auto; }
+        .scroll-top:hover { background: #2563eb; transform: translateY(-4px); }
 
-        /* ============ RESPONSIVE ============ */
+        /* ── TOAST ── */
+        .toast {
+            position: fixed; bottom: 90px; left: 50%; transform: translateX(-50%) translateY(20px);
+            background: rgba(16,185,129,0.95); color: #fff; padding: 12px 24px; border-radius: 50px;
+            font-weight: 700; font-size: 0.9rem; z-index: 999; opacity: 0;
+            transition: all 0.3s ease; pointer-events: none; backdrop-filter: blur(10px);
+        }
+        .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+        /* ── RESPONSIVE ── */
         @media (max-width: 768px) {
-            .codes-grid {
-                grid-template-columns: 1fr;
-                gap: 12px;
-            }
-            .header h1 {
-                font-size: 1.8rem;
-            }
-            .header-icon {
-                font-size: 42px;
-            }
-            .filter-tab {
-                padding: 8px 14px;
-                font-size: 0.78rem;
-            }
-            .code-card {
-                padding: 16px;
-            }
-            .code-badge {
-                font-size: 0.85rem;
-                padding: 5px 10px;
-            }
-            .search-wrapper {
-                border-radius: 40px;
-            }
-            .search-input {
-                font-size: 0.95rem;
-                padding: 12px 6px;
-            }
-            .social-icon-link {
-                padding: 8px 14px;
-                font-size: 0.8rem;
-            }
-            .footer-social {
-                gap: 8px;
-            }
+            .codes-grid { grid-template-columns: 1fr; gap: 12px; }
+            .header h1 { font-size: 1.8rem; }
+            .header-icon { font-size: 42px; }
+            .filter-tab { padding: 8px 14px; font-size: 0.78rem; }
+            .code-card { padding: 16px; }
+            .stats-bar { gap: 8px; }
+            .stat-pill { padding: 6px 12px; font-size: 0.78rem; }
         }
         @media (max-width: 400px) {
-            .codes-grid {
-                grid-template-columns: 1fr;
-            }
-            .filter-tabs {
-                gap: 5px;
-            }
-            .filter-tab {
-                padding: 6px 10px;
-                font-size: 0.7rem;
-            }
-            .badge-country {
-                padding: 5px 10px;
-                font-size: 0.7rem;
-            }
-            .header h1 {
-                font-size: 1.5rem;
-            }
+            .filter-tab { padding: 6px 10px; font-size: 0.7rem; }
+            .badge-country { padding: 5px 10px; font-size: 0.7rem; }
+            .header h1 { font-size: 1.5rem; }
         }
     </style>
 </head>
 <body>
 
-    <!-- ==================== BACKGROUND ==================== -->
-    <div class="bg-universe"></div>
-    <div class="bg-grid"></div>
-    <div class="bg-particles" id="particlesContainer"></div>
+<div class="bg-universe"></div>
+<div class="bg-grid"></div>
+<div class="bg-particles" id="particlesContainer"></div>
+<div class="toast" id="toast"></div>
 
-    <!-- ==================== MAIN CONTAINER ==================== -->
-    <div class="main-container">
+<div class="main-container">
 
-        <!-- HEADER -->
-        <header class="header">
-            <div class="header-icon">🔧</div>
-            <h1>مرجع أكواد أعطال السيارات</h1>
-            <p class="subtitle">OBD-II Diagnostic Trouble Codes Database</p>
-            <div class="badge-row">
-                <span class="badge-country" data-country="كوري"><span class="flag-dot dot-kr"></span> كوري 🇰🇷</span>
-                <span class="badge-country" data-country="ألماني"><span class="flag-dot dot-de"></span> ألماني 🇩🇪</span>
-                <span class="badge-country" data-country="أمريكي"><span class="flag-dot dot-us"></span> أمريكي 🇺🇸</span>
-                <span class="badge-country" data-country="صيني"><span class="flag-dot dot-cn"></span> صيني 🇨🇳</span>
-                <span class="badge-country" data-country="ياباني"><span class="flag-dot dot-jp"></span> ياباني 🇯🇵</span>
-            </div>
-        </header>
-
-        <!-- SEARCH -->
-        <div class="search-section">
-            <div class="search-wrapper">
-                <span class="search-icon">🔍</span>
-                <input type="text" class="search-input" id="searchInput" placeholder="ابحث عن كود عطل... مثال: P0420 أو P0300">
-                <button class="search-clear" id="searchClear" title="مسح">✕</button>
-            </div>
-            <p class="results-count" id="resultsCount">عدد الأكواد المعروضة: <span id="countSpan">0</span></p>
+    <!-- HEADER -->
+    <header class="header">
+        <div class="header-icon">🔧</div>
+        <h1>مرجع أكواد أعطال السيارات</h1>
+        <p class="subtitle">OBD-II Diagnostic Trouble Codes — بيانات حقيقية ودقيقة</p>
+        <div class="badge-row">
+            <span class="badge-country" data-country="عام">🌐 عام</span>
+            <span class="badge-country" data-country="كوري">🇰🇷 كوري</span>
+            <span class="badge-country" data-country="ألماني">🇩🇪 ألماني</span>
+            <span class="badge-country" data-country="أمريكي">🇺🇸 أمريكي</span>
+            <span class="badge-country" data-country="صيني">🇨🇳 صيني</span>
+            <span class="badge-country" data-country="ياباني">🇯🇵 ياباني</span>
         </div>
+    </header>
 
-        <!-- FILTER TABS -->
-        <div class="filter-tabs" id="filterTabs">
-            <button class="filter-tab active" data-filter="all">📋 جميع الأكواد</button>
-            <button class="filter-tab" data-filter="كوري">🇰🇷 كوري</button>
-            <button class="filter-tab" data-filter="ألماني">🇩🇪 ألماني</button>
-            <button class="filter-tab" data-filter="أمريكي">🇺🇸 أمريكي</button>
-            <button class="filter-tab" data-filter="صيني">🇨🇳 صيني</button>
-            <button class="filter-tab" data-filter="ياباني">🇯🇵 ياباني</button>
-        </div>
-
-        <!-- CODES GRID -->
-        <div class="codes-grid" id="codesGrid"></div>
-
+    <!-- STATS -->
+    <div class="stats-bar" id="statsBar">
+        <div class="stat-pill">📋 إجمالي الأكواد: <strong id="totalCount">0</strong></div>
+        <div class="stat-pill">🔴 خطورة عالية: <strong id="highCount">0</strong></div>
+        <div class="stat-pill">🟡 متوسطة: <strong id="medCount">0</strong></div>
+        <div class="stat-pill">🟢 منخفضة: <strong id="lowCount">0</strong></div>
     </div>
 
-    <!-- ==================== FOOTER ==================== -->
-    <footer class="site-footer">
-        <div class="footer-social">
-            <a href="https://snapchat.com/add/sww_p" target="_blank" rel="noopener" class="social-icon-link social-snap" title="سناب شات">
-                <svg class="social-icon-svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2zm1.5 14.5c-.3.1-.6.1-.9.1s-.6 0-.9-.1c-1.5-.4-2.5-1.5-3-3-.1-.3-.2-.6-.2-.9 0-.5.2-1 .6-1.3.4-.3.9-.4 1.4-.3.5.1.9.4 1.2.8.3-.4.7-.7 1.2-.8.5-.1 1 0 1.4.3.4.3.6.8.6 1.3 0 .3-.1.6-.2.9-.5 1.5-1.5 2.6-3 3z"/></svg>
-                sww_p
-            </a>
-            <a href="https://instagram.com/sww_p" target="_blank" rel="noopener" class="social-icon-link social-insta" title="انستقرام">
-                <svg class="social-icon-svg" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="3.5"/><path d="M16.5 3h-9C5.5 3 3 5.5 3 7.5v9C3 18.5 5.5 21 7.5 21h9c2 0 4.5-2.5 4.5-4.5v-9C21 5.5 18.5 3 16.5 3zM12 16.5c-2.5 0-4.5-2-4.5-4.5s2-4.5 4.5-4.5 4.5 2 4.5 4.5-2 4.5-4.5 4.5zm5-8c-.6 0-1-.4-1-1s.4-1 1-1 1 .4 1 1-.4 1-1 1z"/></svg>
-                sww_p
-            </a>
-            <a href="https://twitter.com/sww_p" target="_blank" rel="noopener" class="social-icon-link social-twitter" title="تويتر">
-                <svg class="social-icon-svg" viewBox="0 0 24 24" fill="currentColor"><path d="M18.9 1.5h3.7l-8 9.2L24 22.5h-7.4l-5.8-7.6-6.6 7.6H.5l8.6-9.8L0 1.5h7.6l5.2 6.9 6.1-6.9zm-1.3 18.9h2L6.5 3.5H4.3l13.3 16.9z"/></svg>
-                sww_p
-            </a>
-            <a href="https://t.me/sww_p" target="_blank" rel="noopener" class="social-icon-link social-telegram" title="تلقرام">
-                <svg class="social-icon-svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.94 6.81l-1.55 7.3c-.12.52-.42.65-.85.4l-2.35-1.73-1.13 1.09c-.12.12-.23.23-.48.23l.17-2.42 4.4-3.98c.19-.17-.04-.26-.29-.09l-5.44 3.43-2.34-.73c-.51-.16-.52-.51.11-.75l9.16-3.53c.42-.16.79.1.66.75l-.01.03z"/></svg>
-                sww_p
-            </a>
+    <!-- SEARCH -->
+    <div class="search-section">
+        <div class="search-wrapper">
+            <span class="search-icon">🔍</span>
+            <input type="text" class="search-input" id="searchInput" placeholder="ابحث عن كود عطل... مثال: P0420 أو P0300 أو MAF">
+            <button class="search-clear" id="searchClear" title="مسح">✕</button>
         </div>
-        <p class="footer-dev">تم التطوير بواسطة <span>ابو عساف</span></p>
-        <div class="visitor-counter">
-            <span class="visitor-dot"></span>
-            عدد الزوار: <span class="count-number" id="visitorCount">10,000</span>
-        </div>
-    </footer>
+        <p class="results-count" id="resultsCount">عدد الأكواد المعروضة: <span id="countSpan">0</span></p>
+    </div>
 
-    <!-- SCROLL TO TOP -->
-    <button class="scroll-top" id="scrollTopBtn" title="الرجوع للأعلى">↑</button>
+    <!-- FILTER TABS -->
+    <div class="filter-tabs" id="filterTabs">
+        <button class="filter-tab active" data-filter="all">📋 جميع الأكواد</button>
+        <button class="filter-tab" data-filter="عام">🌐 عام</button>
+        <button class="filter-tab" data-filter="كوري">🇰🇷 كوري</button>
+        <button class="filter-tab" data-filter="ألماني">🇩🇪 ألماني</button>
+        <button class="filter-tab" data-filter="أمريكي">🇺🇸 أمريكي</button>
+        <button class="filter-tab" data-filter="صيني">🇨🇳 صيني</button>
+        <button class="filter-tab" data-filter="ياباني">🇯🇵 ياباني</button>
+    </div>
 
-    <!-- ==================== CODES DATA (ملف خارجي) ==================== -->
-    <script src="codes-data.js"></script>
+    <!-- SEVERITY FILTER -->
+    <div class="severity-tabs" id="severityTabs">
+        <button class="sev-tab active-all" data-sev="all">⚡ كل الخطورة</button>
+        <button class="sev-tab" data-sev="عالٍ">🔴 خطورة عالية</button>
+        <button class="sev-tab" data-sev="متوسط">🟡 خطورة متوسطة</button>
+        <button class="sev-tab" data-sev="منخفض">🟢 خطورة منخفضة</button>
+    </div>
 
-    <!-- ==================== MAIN SCRIPT ==================== -->
-    <script>
-        (function() {
-            // ============ PARTICLES BACKGROUND ============
-            const particlesContainer = document.getElementById('particlesContainer');
-            for (let i = 0; i < 50; i++) {
-                const particle = document.createElement('div');
-                particle.classList.add('particle');
-                const size = Math.random() * 3 + 1.5;
-                particle.style.width = size + 'px';
-                particle.style.height = size + 'px';
-                particle.style.left = Math.random() * 100 + '%';
-                particle.style.animationDuration = (Math.random() * 12 + 8) + 's';
-                particle.style.animationDelay = Math.random() * 10 + 's';
-                particle.style.background = `rgba(255,255,255,${Math.random() * 0.4 + 0.1})`;
-                particlesContainer.appendChild(particle);
+    <!-- GRID -->
+    <div class="codes-grid" id="codesGrid"></div>
+</div>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+    <div class="footer-social">
+        <a href="https://snapchat.com/add/sww_p" target="_blank" rel="noopener" class="social-icon-link social-snap">
+            <svg class="social-icon-svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2zm1.5 14.5c-.3.1-.6.1-.9.1s-.6 0-.9-.1c-1.5-.4-2.5-1.5-3-3-.1-.3-.2-.6-.2-.9 0-.5.2-1 .6-1.3.4-.3.9-.4 1.4-.3.5.1.9.4 1.2.8.3-.4.7-.7 1.2-.8.5-.1 1 0 1.4.3.4.3.6.8.6 1.3 0 .3-.1.6-.2.9-.5 1.5-1.5 2.6-3 3z"/></svg>
+            sww_p
+        </a>
+        <a href="https://instagram.com/sww_p" target="_blank" rel="noopener" class="social-icon-link social-insta">
+            <svg class="social-icon-svg" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="3.5"/><path d="M16.5 3h-9C5.5 3 3 5.5 3 7.5v9C3 18.5 5.5 21 7.5 21h9c2 0 4.5-2.5 4.5-4.5v-9C21 5.5 18.5 3 16.5 3zM12 16.5c-2.5 0-4.5-2-4.5-4.5s2-4.5 4.5-4.5 4.5 2 4.5 4.5-2 4.5-4.5 4.5zm5-8c-.6 0-1-.4-1-1s.4-1 1-1 1 .4 1 1-.4 1-1 1z"/></svg>
+            sww_p
+        </a>
+        <a href="https://twitter.com/sww_p" target="_blank" rel="noopener" class="social-icon-link social-twitter">
+            <svg class="social-icon-svg" viewBox="0 0 24 24" fill="currentColor"><path d="M18.9 1.5h3.7l-8 9.2L24 22.5h-7.4l-5.8-7.6-6.6 7.6H.5l8.6-9.8L0 1.5h7.6l5.2 6.9 6.1-6.9zm-1.3 18.9h2L6.5 3.5H4.3l13.3 16.9z"/></svg>
+            sww_p
+        </a>
+        <a href="https://t.me/sww_p" target="_blank" rel="noopener" class="social-icon-link social-telegram">
+            <svg class="social-icon-svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.94 6.81l-1.55 7.3c-.12.52-.42.65-.85.4l-2.35-1.73-1.13 1.09c-.12.12-.23.23-.48.23l.17-2.42 4.4-3.98c.19-.17-.04-.26-.29-.09l-5.44 3.43-2.34-.73c-.51-.16-.52-.51.11-.75l9.16-3.53c.42-.16.79.1.66.75l-.01.03z"/></svg>
+            sww_p
+        </a>
+    </div>
+    <p class="footer-dev">تم التطوير بواسطة <span>ابو عساف</span></p>
+    <p class="footer-note">جميع الأكواد OBD-II حقيقية ومرجعية — لأغراض التشخيص فقط</p>
+</footer>
+
+<button class="scroll-top" id="scrollTopBtn" title="الرجوع للأعلى">↑</button>
+
+<!-- DATA FILE -->
+<script src="codes-data.js"></script>
+
+<script>
+(function() {
+    // ── PARTICLES ──
+    const pc = document.getElementById('particlesContainer');
+    for (let i = 0; i < 40; i++) {
+        const p = document.createElement('div');
+        p.className = 'particle';
+        const s = Math.random() * 3 + 1.5;
+        p.style.cssText = `width:${s}px;height:${s}px;left:${Math.random()*100}%;animation-duration:${Math.random()*12+8}s;animation-delay:${Math.random()*10}s;background:rgba(255,255,255,${Math.random()*0.4+0.1})`;
+        pc.appendChild(p);
+    }
+
+    // ── TOAST ──
+    function showToast(msg) {
+        const t = document.getElementById('toast');
+        t.textContent = msg;
+        t.classList.add('show');
+        setTimeout(() => t.classList.remove('show'), 2500);
+    }
+
+    // ── STATE ──
+    const codesGrid   = document.getElementById('codesGrid');
+    const searchInput = document.getElementById('searchInput');
+    const searchClear = document.getElementById('searchClear');
+    const countSpan   = document.getElementById('countSpan');
+    const filterTabs  = document.getElementById('filterTabs');
+    const sevTabs     = document.getElementById('severityTabs');
+    const scrollTopBtn= document.getElementById('scrollTopBtn');
+
+    let currentFilter   = 'all';
+    let currentSeverity = 'all';
+    let searchQuery     = '';
+
+    // ── STATS ──
+    function updateStats(codes) {
+        document.getElementById('totalCount').textContent = (window.faultCodes||[]).length;
+        const all = window.faultCodes || [];
+        document.getElementById('highCount').textContent = all.filter(c=>c.severity==='عالٍ').length;
+        document.getElementById('medCount').textContent  = all.filter(c=>c.severity==='متوسط').length;
+        document.getElementById('lowCount').textContent  = all.filter(c=>c.severity==='منخفض').length;
+    }
+
+    // ── RENDER ──
+    function renderCodes() {
+        let filtered = window.faultCodes || [];
+
+        if (currentFilter !== 'all') {
+            filtered = filtered.filter(c => c.country === currentFilter);
+        }
+        if (currentSeverity !== 'all') {
+            filtered = filtered.filter(c => c.severity === currentSeverity);
+        }
+        if (searchQuery.trim()) {
+            const q = searchQuery.trim().toLowerCase();
+            filtered = filtered.filter(c =>
+                c.code.toLowerCase().includes(q) ||
+                c.desc.toLowerCase().includes(q) ||
+                c.causes.toLowerCase().includes(q) ||
+                c.country.toLowerCase().includes(q)
+            );
+        }
+
+        countSpan.textContent = filtered.length;
+        codesGrid.innerHTML = '';
+
+        if (!filtered.length) {
+            codesGrid.innerHTML = `
+                <div class="no-results">
+                    <span class="icon-big">😕</span>
+                    <p>لا توجد نتائج مطابقة</p>
+                    <p style="font-size:.85rem;margin-top:4px">جرب كود آخر مثل P0420 أو P0300</p>
+                </div>`;
+            return;
+        }
+
+        // Check if searching for exact code → scroll to it
+        const exactCode = searchQuery.trim().toUpperCase();
+
+        filtered.forEach(cd => {
+            const card = document.createElement('div');
+            const typeClass = cd.code[0]==='P'?'type-p':cd.code[0]==='B'?'type-b':cd.code[0]==='C'?'type-c':'type-u';
+            const sevClass  = cd.severity==='عالٍ'?'sev-high':cd.severity==='متوسط'?'sev-med':'sev-low';
+            const sevLabel  = cd.severity==='عالٍ'?'sev-label-high':cd.severity==='متوسط'?'sev-label-med':'sev-label-low';
+            const sevEmoji  = cd.severity==='عالٍ'?'🔴':cd.severity==='متوسط'?'🟡':'🟢';
+
+            card.className = `code-card ${sevClass}`;
+            card.id = 'code-' + cd.code;
+            card.innerHTML = `
+                <button class="copy-btn" data-code="${cd.code}" title="نسخ الكود">📋</button>
+                <button class="share-btn" data-code="${cd.code}" title="مشاركة">🔗</button>
+                <div class="code-header">
+                    <span class="code-badge ${typeClass}">${cd.code}</span>
+                    <span class="code-country-tag">${cd.country}</span>
+                    <span class="severity-tag ${sevLabel}">${sevEmoji} ${cd.severity}</span>
+                </div>
+                <p class="code-desc">${cd.desc}</p>
+                <p class="code-causes"><span class="code-causes-label">الأسباب: </span>${cd.causes}</p>
+                <p class="expand-hint"><span class="arrow">▼</span><span class="hint-text"></span></p>
+            `;
+
+            card.addEventListener('click', function(e) {
+                if (e.target.closest('.copy-btn') || e.target.closest('.share-btn')) return;
+                this.classList.toggle('expanded');
+            });
+
+            codesGrid.appendChild(card);
+
+            // Auto-expand exact match
+            if (cd.code === exactCode) {
+                card.classList.add('expanded');
+                setTimeout(() => card.scrollIntoView({ behavior: 'smooth', block: 'center' }), 100);
             }
+        });
 
-            // ============ VISITOR COUNTER (localStorage) ============
-            function getVisitorCount() {
-                let count = localStorage.getItem('obd_visitor_count');
-                if (!count) {
-                    count = 10000;
-                } else {
-                    count = parseInt(count);
-                }
-                // زيادة عشوائية بين 1 و 18
-                const increment = Math.floor(Math.random() * 18) + 1;
-                count += increment;
-                localStorage.setItem('obd_visitor_count', count);
-                return count;
-            }
-            const visitorCount = getVisitorCount();
-            document.getElementById('visitorCount').textContent = visitorCount.toLocaleString('en-US');
-
-            // ============ DOM ELEMENTS ============
-            const codesGrid = document.getElementById('codesGrid');
-            const searchInput = document.getElementById('searchInput');
-            const searchClear = document.getElementById('searchClear');
-            const countSpan = document.getElementById('countSpan');
-            const filterTabs = document.getElementById('filterTabs');
-            const scrollTopBtn = document.getElementById('scrollTopBtn');
-            const badgeCountries = document.querySelectorAll('.badge-country');
-
-            let currentFilter = 'all';
-            let searchQuery = '';
-
-            // ============ RENDER CODES ============
-            function renderCodes() {
-                let filtered = window.faultCodes || [];
-
-                // فلترة حسب التصنيف
-                if (currentFilter !== 'all') {
-                    filtered = filtered.filter(c => c.country === 'عام' || c.country === currentFilter);
-                }
-
-                // فلترة حسب البحث
-                if (searchQuery.trim()) {
-                    const q = searchQuery.trim().toLowerCase();
-                    filtered = filtered.filter(c =>
-                        c.code.toLowerCase().includes(q) ||
-                        c.desc.toLowerCase().includes(q) ||
-                        c.causes.toLowerCase().includes(q) ||
-                        c.country.toLowerCase().includes(q)
-                    );
-                }
-
-                countSpan.textContent = filtered.length;
-                codesGrid.innerHTML = '';
-
-                if (filtered.length === 0) {
-                    codesGrid.innerHTML = `
-                            <div class="no-results">
-                                <span class="icon-big">😕</span>
-                                <p>لا توجد نتائج مطابقة لبحثك</p>
-                                <p style="font-size:0.85rem;margin-top:4px;">جرب كود آخر مثل P0420 أو P0300</p>
-                            </div>`;
-                    return;
-                }
-
-                filtered.forEach(codeData => {
-                    const card = document.createElement('div');
-                    card.className = 'code-card';
-                    const typeClass = codeData.code.startsWith('P') ? 'type-p' :
-                        codeData.code.startsWith('B') ? 'type-b' :
-                        codeData.code.startsWith('C') ? 'type-c' :
-                        codeData.code.startsWith('U') ? 'type-u' : 'type-p';
-                    card.innerHTML = `
-                            <button class="copy-btn" data-code="${codeData.code}" title="نسخ الكود">📋</button>
-                            <div class="code-header">
-                                <span class="code-badge ${typeClass}">${codeData.code}</span>
-                                <span class="code-country-tag">${codeData.country}</span>
-                            </div>
-                            <p class="code-desc">${codeData.desc}</p>
-                            <p class="code-causes"><span class="code-causes-label">الأسباب:</span> ${codeData.causes}</p>
-                            <p class="expand-hint">اضغط للتوسيع وعرض المزيد...</p>
-                        `;
-                    // Toggle expand on click (not on copy button)
-                    card.addEventListener('click', function(e) {
-                        if (e.target.closest('.copy-btn')) return;
-                        card.classList.toggle('expanded');
-                    });
-                    codesGrid.appendChild(card);
-                });
-
-                // Attach copy button events
-                document.querySelectorAll('.copy-btn').forEach(btn => {
-                    btn.addEventListener('click', function(e) {
-                        e.stopPropagation();
-                        const code = this.getAttribute('data-code');
-                        navigator.clipboard.writeText(code).then(() => {
-                            this.classList.add('copied');
-                            this.textContent = '✓';
-                            setTimeout(() => {
-                                this.classList.remove('copied');
-                                this.textContent = '📋';
-                            }, 1500);
-                        }).catch(() => {
-                            // fallback
-                            const ta = document.createElement('textarea');
-                            ta.value = code;
-                            ta.style.position = 'fixed';
-                            ta.style.opacity = '0';
-                            document.body.appendChild(ta);
-                            ta.select();
-                            document.execCommand('copy');
-                            document.body.removeChild(ta);
-                            this.classList.add('copied');
-                            this.textContent = '✓';
-                            setTimeout(() => {
-                                this.classList.remove('copied');
-                                this.textContent = '📋';
-                            }, 1500);
-                        });
-                    });
-                });
-            }
-
-            // ============ EVENT LISTENERS ============
-            searchInput.addEventListener('input', function() {
-                searchQuery = this.value;
-                if (searchQuery.trim()) {
-                    searchClear.classList.add('visible');
-                } else {
-                    searchClear.classList.remove('visible');
-                }
-                renderCodes();
+        // Copy buttons
+        document.querySelectorAll('.copy-btn').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                const code = this.dataset.code;
+                const doCopy = () => {
+                    this.classList.add('copied');
+                    this.textContent = '✓';
+                    showToast(`تم نسخ ${code} ✓`);
+                    setTimeout(() => { this.classList.remove('copied'); this.textContent = '📋'; }, 1600);
+                };
+                if (navigator.clipboard) {
+                    navigator.clipboard.writeText(code).then(doCopy).catch(() => fallbackCopy(code, doCopy));
+                } else fallbackCopy(code, doCopy);
             });
+        });
 
-            searchClear.addEventListener('click', function() {
-                searchInput.value = '';
-                searchQuery = '';
-                searchClear.classList.remove('visible');
-                searchInput.focus();
-                renderCodes();
-            });
-
-            filterTabs.addEventListener('click', function(e) {
-                if (e.target.classList.contains('filter-tab')) {
-                    document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
-                    e.target.classList.add('active');
-                    currentFilter = e.target.getAttribute('data-filter');
-                    // Sync badge countries
-                    document.querySelectorAll('.badge-country').forEach(b => b.classList.remove('active'));
-                    const matchingBadge = document.querySelector(`.badge-country[data-country="${currentFilter}"]`);
-                    if (matchingBadge) matchingBadge.classList.add('active');
-                    renderCodes();
-                    // Scroll to grid
-                    codesGrid.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        // Share buttons
+        document.querySelectorAll('.share-btn').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                const code = this.dataset.code;
+                const url = window.location.href.split('#')[0] + '#code-' + code;
+                if (navigator.clipboard) {
+                    navigator.clipboard.writeText(url).then(() => showToast('تم نسخ رابط الكود 🔗')).catch(() => {});
                 }
             });
+        });
+    }
 
-            // Badge countries click
-            badgeCountries.forEach(badge => {
-                badge.addEventListener('click', function() {
-                    const country = this.getAttribute('data-country');
-                    currentFilter = country;
-                    // Update filter tabs
-                    document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
-                    const matchingTab = document.querySelector(`.filter-tab[data-filter="${country}"]`);
-                    if (matchingTab) matchingTab.classList.add('active');
-                    else {
-                        // If no exact tab, activate 'all'? Actually we have tabs for each.
-                        // Fallback: activate the matching one
-                        const allTab = document.querySelector('.filter-tab[data-filter="all"]');
-                        if (allTab) allTab.classList.add('active');
-                    }
-                    // Update badges
-                    document.querySelectorAll('.badge-country').forEach(b => b.classList.remove('active'));
-                    this.classList.add('active');
-                    renderCodes();
-                    codesGrid.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                });
-            });
+    function fallbackCopy(text, cb) {
+        const ta = document.createElement('textarea');
+        ta.value = text;
+        ta.style.cssText = 'position:fixed;opacity:0';
+        document.body.appendChild(ta); ta.select();
+        document.execCommand('copy');
+        document.body.removeChild(ta);
+        cb();
+    }
 
-            // Scroll to top button
-            window.addEventListener('scroll', function() {
-                if (window.scrollY > 600) {
-                    scrollTopBtn.classList.add('visible');
-                } else {
-                    scrollTopBtn.classList.remove('visible');
-                }
-            });
-            scrollTopBtn.addEventListener('click', function() {
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-            });
+    // ── SEARCH ──
+    searchInput.addEventListener('input', function() {
+        searchQuery = this.value;
+        searchClear.classList.toggle('visible', !!searchQuery.trim());
+        renderCodes();
+    });
+    searchClear.addEventListener('click', function() {
+        searchInput.value = '';
+        searchQuery = '';
+        searchClear.classList.remove('visible');
+        searchInput.focus();
+        renderCodes();
+    });
 
-            // Keyboard shortcut: Ctrl+K or / to focus search
-            document.addEventListener('keydown', function(e) {
-                if ((e.ctrlKey && e.key === 'k') || (e.key === '/' && !e.ctrlKey && document.activeElement === document.body)) {
-                    e.preventDefault();
-                    searchInput.focus();
-                }
-                if (e.key === 'Escape' && document.activeElement === searchInput) {
-                    searchInput.value = '';
-                    searchQuery = '';
-                    searchClear.classList.remove('visible');
-                    searchInput.blur();
-                    renderCodes();
-                }
-            });
+    // ── FILTER TABS ──
+    filterTabs.addEventListener('click', function(e) {
+        const tab = e.target.closest('.filter-tab');
+        if (!tab) return;
+        document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+        currentFilter = tab.dataset.filter;
+        // sync badge
+        document.querySelectorAll('.badge-country').forEach(b => b.classList.remove('active'));
+        const matchBadge = document.querySelector(`.badge-country[data-country="${currentFilter}"]`);
+        if (matchBadge) matchBadge.classList.add('active');
+        renderCodes();
+        codesGrid.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
 
-            // ============ INITIAL RENDER ============
-            function waitForData() {
-                if (window.faultCodes && window.faultCodes.length > 0) {
-                    renderCodes();
-                } else {
-                    setTimeout(waitForData, 100);
-                }
-            }
-            waitForData();
+    // ── BADGE COUNTRIES ──
+    document.querySelectorAll('.badge-country').forEach(badge => {
+        badge.addEventListener('click', function() {
+            currentFilter = this.dataset.country;
+            document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
+            const matchTab = document.querySelector(`.filter-tab[data-filter="${currentFilter}"]`);
+            if (matchTab) matchTab.classList.add('active');
+            document.querySelectorAll('.badge-country').forEach(b => b.classList.remove('active'));
+            this.classList.add('active');
+            renderCodes();
+            codesGrid.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        });
+    });
 
-            console.log('%c🚗 مرجع أكواد أعطال السيارات %c| تم التطوير بواسطة ابو عساف',
-                'font-size:1.2rem;color:#f59e0b;', 'color:#60a5fa;');
-            console.log('%cسناب وانستا وتويتر وتلقرام: sww_p', 'color:#a78bfa;font-size:0.9rem;');
-            console.log('%cعدد الأكواد: ' + (window.faultCodes ? window.faultCodes.length : 'جار التحميل...'), 'color:#34d399;');
-        })();
-    </script>
+    // ── SEVERITY TABS ──
+    sevTabs.addEventListener('click', function(e) {
+        const tab = e.target.closest('.sev-tab');
+        if (!tab) return;
+        document.querySelectorAll('.sev-tab').forEach(t => {
+            t.classList.remove('active-all','active-high','active-med','active-low');
+        });
+        currentSeverity = tab.dataset.sev;
+        const cls = currentSeverity==='all'?'active-all':currentSeverity==='عالٍ'?'active-high':currentSeverity==='متوسط'?'active-med':'active-low';
+        tab.classList.add(cls);
+        renderCodes();
+    });
+
+    // ── SCROLL TOP ──
+    window.addEventListener('scroll', () => scrollTopBtn.classList.toggle('visible', window.scrollY > 600));
+    scrollTopBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+    // ── KEYBOARD ──
+    document.addEventListener('keydown', e => {
+        if ((e.ctrlKey && e.key==='k') || (e.key==='/' && document.activeElement === document.body)) {
+            e.preventDefault(); searchInput.focus();
+        }
+        if (e.key==='Escape' && document.activeElement===searchInput) {
+            searchInput.value=''; searchQuery='';
+            searchClear.classList.remove('visible');
+            searchInput.blur(); renderCodes();
+        }
+    });
+
+    // ── ANCHOR SUPPORT ──
+    function checkAnchor() {
+        const hash = window.location.hash;
+        if (hash && hash.startsWith('#code-')) {
+            const code = hash.replace('#code-','');
+            searchInput.value = code;
+            searchQuery = code;
+            searchClear.classList.add('visible');
+        }
+    }
+
+    // ── INIT ──
+    function waitForData() {
+        if (window.faultCodes && window.faultCodes.length > 0) {
+            updateStats();
+            checkAnchor();
+            renderCodes();
+        } else {
+            setTimeout(waitForData, 100);
+        }
+    }
+    waitForData();
+
+    console.log('%c🚗 مرجع أكواد OBD-II %c| ابو عساف | sww_p', 'font-size:1.2rem;color:#f59e0b;', 'color:#60a5fa;');
+})();
+</script>
 </body>
 </html>
